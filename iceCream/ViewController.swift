@@ -64,32 +64,53 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&v=20160607&categoryId=4bf58dd8d48988d1c9941735&limit=15&client_id=\(client_id)&client_secret=\(client_secret)"
         
+        
+//        let url = "https://api.foursquare.com/v2/venues/explore? sortByDistance&ll=\(self.currentLocation.coordinate.latitude), \(self.currentLocation.coordinate.longitude)&query=ice+cream&&client_id=\(client_id)&client_secret=\(client_secret)&v=20170924&limit=20&sortByDistance=1&cartegoryid=4bf58dd8d48988d1c9941735"
+//        print(url)
+//        
+     
         let request = NSMutableURLRequest(url: URL(string: url)!)
-
+        
+        
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             if let data = data,
                 let string = String(data: data, encoding: .utf8) {
                 
                 let json = JSON(data: data)
+        
+    
                 self.searchResults = json["response"]["group"]["results"].arrayValue
                 
                 
+                var restFlag : Bool
                 for (_, subJson) in json["response"]["group"]["results"] {
+                    restFlag = false
                     let name = subJson["venue"]["name"].stringValue
                     if !name.isEmpty {
-                        print(subJson["venue"]["name"].string!)
+                        
+                        // check if it is a restaurant
+                        for (_,category) in subJson["venue"]["categories"] {
+                            if ((category["name"].string?.range(of: "Restaurant")) != nil) {
+                                restFlag = true
+                            }
+                        }
+                        
+                        if (!restFlag) {
                         self.venueArray.append(Venue(name:subJson["venue"]["name"].string!,
                                                  distance:subJson["venue"]["location"]["distance"].int!,
                                                  lat:subJson["venue"]["location"]["lat"].double!,
                                                  long:subJson["venue"]["location"]["lng"].double!,
                                                  id:subJson["venue"]["id"].string!))
-//                        print(self.venueArray.count)
+                        }
                     }
+                }
+                self.venueArray.sort(by: { $0.distance < $1.distance})
+                for venue in self.venueArray{
+                    print(venue.name)
                 }
                 print(self.venueArray.count)
             }
         }
-        
         
         
         task.resume()
