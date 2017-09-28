@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B22F1D846036596842CE24EB /* Pods_iceCream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49139B663F684D64495D5E2E /* Pods_iceCream.framework */; };
 		F147D85B1F76124A006E940F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F147D85A1F76124A006E940F /* AppDelegate.swift */; };
 		F147D85D1F76124A006E940F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F147D85C1F76124A006E940F /* ViewController.swift */; };
 		F147D8601F76124A006E940F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F147D85E1F76124A006E940F /* Main.storyboard */; };
@@ -16,9 +15,10 @@
 		F147D8701F76124A006E940F /* iceCreamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F147D86F1F76124A006E940F /* iceCreamTests.swift */; };
 		F147D87B1F76124A006E940F /* iceCreamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F147D87A1F76124A006E940F /* iceCreamUITests.swift */; };
 		F147D88B1F7612DB006E940F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F147D88A1F7612DB006E940F /* Podfile */; };
-		F147D88E1F761DE7006E940F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F147D88D1F761DE7006E940F /* MapKit.framework */; };
-		F178E08F1F765BED00D335D8 /* iceCreamAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F178E08E1F765BED00D335D8 /* iceCreamAnnotation.swift */; };
 		F178E0971F76F6DB00D335D8 /* SwiftyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = F178E0961F76F6DB00D335D8 /* SwiftyJson.swift */; };
+		F1B175581F79BEBB002968F2 /* iceCreamAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B175571F79BEBB002968F2 /* iceCreamAnnotation.swift */; };
+		F1FAFAD81F7C59900001B741 /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFAD71F7C59900001B741 /* ButtonViewController.swift */; };
+		F1FAFADA1F7C66E30001B741 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFAD91F7C66E30001B741 /* Venue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +57,10 @@
 		F147D87C1F76124A006E940F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F147D88A1F7612DB006E940F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F147D88D1F761DE7006E940F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		F178E08E1F765BED00D335D8 /* iceCreamAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iceCreamAnnotation.swift; sourceTree = "<group>"; };
 		F178E0961F76F6DB00D335D8 /* SwiftyJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJson.swift; sourceTree = "<group>"; };
+		F1B175571F79BEBB002968F2 /* iceCreamAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iceCreamAnnotation.swift; sourceTree = "<group>"; };
+		F1FAFAD71F7C59900001B741 /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonViewController.swift; path = ../ButtonViewController.swift; sourceTree = "<group>"; };
+		F1FAFAD91F7C66E30001B741 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F147D88E1F761DE7006E940F /* MapKit.framework in Frameworks */,
-				B22F1D846036596842CE24EB /* Pods_iceCream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,10 +123,12 @@
 			isa = PBXGroup;
 			children = (
 				F147D88A1F7612DB006E940F /* Podfile */,
+				F1FAFAD91F7C66E30001B741 /* Venue.swift */,
 				F147D85A1F76124A006E940F /* AppDelegate.swift */,
 				F178E0961F76F6DB00D335D8 /* SwiftyJson.swift */,
+				F1FAFAD71F7C59900001B741 /* ButtonViewController.swift */,
 				F147D85C1F76124A006E940F /* ViewController.swift */,
-				F178E08E1F765BED00D335D8 /* iceCreamAnnotation.swift */,
+				F1B175571F79BEBB002968F2 /* iceCreamAnnotation.swift */,
 				F147D85E1F76124A006E940F /* Main.storyboard */,
 				F147D8611F76124A006E940F /* Assets.xcassets */,
 				F147D8631F76124A006E940F /* LaunchScreen.storyboard */,
@@ -233,6 +235,7 @@
 				TargetAttributes = {
 					F147D8561F76124A006E940F = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = P265F5238H;
 						ProvisioningStyle = Automatic;
 					};
 					F147D86A1F76124A006E940F = {
@@ -358,10 +361,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F178E08F1F765BED00D335D8 /* iceCreamAnnotation.swift in Sources */,
 				F178E0971F76F6DB00D335D8 /* SwiftyJson.swift in Sources */,
+				F1FAFADA1F7C66E30001B741 /* Venue.swift in Sources */,
 				F147D85D1F76124A006E940F /* ViewController.swift in Sources */,
 				F147D85B1F76124A006E940F /* AppDelegate.swift in Sources */,
+				F1FAFAD81F7C59900001B741 /* ButtonViewController.swift in Sources */,
+				F1B175581F79BEBB002968F2 /* iceCreamAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,10 +521,14 @@
 			baseConfigurationReference = 73A7064A45543769E39EA465 /* Pods-iceCream.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P265F5238H;
 				INFOPLIST_FILE = iceCream/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.iceCream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -530,10 +539,14 @@
 			baseConfigurationReference = 1BE638A9C24EDE84A293674A /* Pods-iceCream.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = P265F5238H;
 				INFOPLIST_FILE = iceCream/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.iceCream;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

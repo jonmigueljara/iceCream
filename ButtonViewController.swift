@@ -1,63 +1,96 @@
- //
-//  ViewController.swift
-//  iceCream
 //
-//  Created by Jon Miguel Jara on 9/22/17.
-//  Copyright © 2017 Jon Miguel Jara. All rights reserved.
+//  ButtonViewController.swift
+//  
+//
+//  Created by Jon Miguel Jara on 9/27/17.
+//
 //
 
 import UIKit
-import MapKit
 import CoreLocation
 
 
-
-
-
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ButtonViewController: UIViewController, CLLocationManagerDelegate {
     
-
-    let distanceSpan:Double = 500
-    
+    let locationManager = CLLocationManager()
     var currentLocation:CLLocation!
-    var venueItems : [[String: AnyObject]]?
+    var flag = true
     let client_id = "CHQUJPJGWBB52W24RI4UTCPYY0CERJCI1VQZWAF3ZP1GOVMQ" // visit developer.foursqure.com for API key
     let client_secret = "CQIZZPJ3QLZTQCGOCZK4LOWAV1DG5DAYALF1YICW22KGD2TG" // visit developer.foursqure.com for API key
     var searchResults = [JSON]()
     var venueArray =  [Venue] ()
     var nearestVenue = Venue()
-
-
-    @IBOutlet var mapView: MKMapView!
-
+    
+    @IBOutlet weak var iceCreamButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        print(self.nearestVenue.name)
-        
-        setMapView()
-        
-        searchForIceCream()
-        
-        let directions = UIBarButtonItem(title: "Directions", style: .plain, target: self, action: #selector(getDirections))
-        navigationItem.rightBarButtonItem = directions
 
         
-        mapView.delegate = self
+        // set up location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        
+        // add action to the coffee button
+        iceCreamButton.addTarget(self, action: #selector(getCurrentLocation), for: .touchUpInside)
+        
+        print(nearestVenue.name)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // always make sure the coffeeButton is visible
+        if iceCreamButton.isHidden {
+            iceCreamButton.isHidden = false
+        }
+        // request location access
+        locationManager.requestWhenInUseAuthorization()
+        flag = true
+    }
+
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func getCurrentLocation() {
+        // check if access is granted
+        locationManager.startUpdatingLocation()
     
     }
     
-    /** searchForIceCream()
-    * Calls Foursquare API and stores into a Venue Data structure
-    */
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // show the activity indicator
+        iceCreamButton.isHidden = true
+        
+        
+        // set a flag so segue is only called once
+        if flag {
+            currentLocation = locations[0]
+            locationManager.stopUpdatingLocation()
+            flag = false
+            performSegue(withIdentifier: "showIceCream", sender: self)
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Pass the latitude and longitude to the new view controller
+        if segue.identifier == "showIceCream" {
+            let vc = segue.destination as! ViewController
+            vc.currentLocation = currentLocation
+        }
+    }
+    
+    
+    
+    
     
     func searchForIceCream() {
         
         let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&v=20160607&categoryId=4bf58dd8d48988d1c9941735&limit=15&client_id=\(client_id)&client_secret=\(client_secret)&openNow=1"
-        //        print(url)
+//        print(url)
         
         let request = NSMutableURLRequest(url: URL(string: url)!)
         
@@ -116,65 +149,29 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 }
                 
                 self.venueArray.sort(by: { $0.distance < $1.distance})
-                
+
                 
                 self.nearestVenue = self.venueArray[0]
-                
-                DispatchQueue.main.async {
-                    let icePoint = iceCreamAnnotation(title: self.nearestVenue.name, coordinate: CLLocationCoordinate2D(latitude: self.nearestVenue.lat, longitude: self.nearestVenue.long))
-                    self.mapView.addAnnotation(icePoint)
-                    self.mapView.selectAnnotation(icePoint, animated: true)
-                }
-                
             }
             
         }
         task.resume()
     }
     
-    func setMapView () {
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
-        let myLocation:CLLocationCoordinate2D = CLLocationCoordinate2DMake(self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude)
-        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        mapView.setRegion(region, animated: true)
-        self.mapView.showsUserLocation = true
+    func showLocationAlert() {
+        let alert = UIAlertController(title: "Location Disabled", message: "Please enable location", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
- 
+    /*
+    // MARK: - Navigation
 
-
-
-func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-    if let annotation = annotation as? iceCreamAnnotation {
-        let identifier = "pin"
-        var view: MKPinAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            as? MKPinAnnotationView { // 2
-            dequeuedView.annotation = annotation
-            view = dequeuedView
-        } else {
-            // 3
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.canShowCallout = true
-            view.calloutOffset = CGPoint(x: -5, y: 5)
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as! UIView
-        }
-        return view
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    return nil
+    */
+
 }
-    
-    func getDirections() {
-        let loc = mapView.annotations.first as! iceCreamAnnotation
-        print(loc.title)
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
-        loc.mapItem().openInMaps(launchOptions: launchOptions)
-    }
-    
-
-
-
-
-
-
- }
