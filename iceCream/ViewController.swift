@@ -26,6 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var searchResults = [JSON]()
     var venueArray =  [Venue] ()
     var nearestVenue = Venue()
+    var myRoute : MKRoute!
 
 
     @IBOutlet var mapView: MKMapView!
@@ -124,6 +125,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     let icePoint = iceCreamAnnotation(title: self.nearestVenue.name, coordinate: CLLocationCoordinate2D(latitude: self.nearestVenue.lat, longitude: self.nearestVenue.long))
                     self.mapView.addAnnotation(icePoint)
                     self.mapView.selectAnnotation(icePoint, animated: true)
+                    
+                    self.calcDirections(annotation: icePoint)
+            
                 }
                 
             }
@@ -171,9 +175,63 @@ func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -
         loc.mapItem().openInMaps(launchOptions: launchOptions)
     }
     
+    
 
+    func calcDirections(annotation: iceCreamAnnotation!) {
+        let request: MKDirectionsRequest = MKDirectionsRequest()
+        
+        let currentLocationItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude), addressDictionary: nil))
+        
+        request.source = currentLocationItem
+        request.destination = annotation.mapItem()
+        
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        
+        
+        directions.calculate(completionHandler: {
+            
+            response, error in
+            
+            if error == nil {
+                
+                self.myRoute = response!.routes[0] as MKRoute
+                self.mapView.add(self.myRoute.polyline)
+                
+            }
+        })
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) ->MKOverlayRenderer {
+        
+        let myLineRenderer = MKPolylineRenderer(polyline: myRoute.polyline)
+        
+        myLineRenderer.strokeColor = UIColor.cyan
+        
+        myLineRenderer.lineWidth = 2
+        
+        return myLineRenderer
+    }
 
-
+    func plotPolyline(route: MKRoute) {
+        // 1
+        mapView.add(route.polyline)
+        // 2
+        if mapView.overlays.count == 1 {
+            mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+                                      edgePadding: UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0),
+                                      animated: false)
+        }
+    // 3
+        else {
+            let polylineBoundingRect =  MKMapRectUnion(mapView.visibleMapRect,
+                                                       route.polyline.boundingMapRect)
+            mapView.setVisibleMapRect(polylineBoundingRect,
+                              edgePadding: UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0),
+                              animated: false)
+        }
+    }
 
 
 

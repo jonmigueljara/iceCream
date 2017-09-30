@@ -19,6 +19,7 @@
 		F1B175581F79BEBB002968F2 /* iceCreamAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B175571F79BEBB002968F2 /* iceCreamAnnotation.swift */; };
 		F1FAFAD81F7C59900001B741 /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFAD71F7C59900001B741 /* ButtonViewController.swift */; };
 		F1FAFADA1F7C66E30001B741 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FAFAD91F7C66E30001B741 /* Venue.swift */; };
+		F1FAFADF1F7F14770001B741 /* CANDY.TTF in Resources */ = {isa = PBXBuildFile; fileRef = F1FAFADE1F7F14770001B741 /* CANDY.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		F1B175571F79BEBB002968F2 /* iceCreamAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iceCreamAnnotation.swift; sourceTree = "<group>"; };
 		F1FAFAD71F7C59900001B741 /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonViewController.swift; path = ../ButtonViewController.swift; sourceTree = "<group>"; };
 		F1FAFAD91F7C66E30001B741 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		F1FAFADB1F7F0CC40001B741 /* Candice */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Candice; sourceTree = "<group>"; };
+		F1FAFADE1F7F14770001B741 /* CANDY.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = CANDY.TTF; path = ../Candice/CANDY.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,7 @@
 				F147D86E1F76124A006E940F /* iceCreamTests */,
 				F147D8791F76124A006E940F /* iceCreamUITests */,
 				F147D8581F76124A006E940F /* Products */,
+				F1FAFADB1F7F0CC40001B741 /* Candice */,
 				F147D88C1F761DE7006E940F /* Frameworks */,
 				767510AEDF968DFA12C612BA /* Pods */,
 			);
@@ -132,6 +136,7 @@
 				F147D85E1F76124A006E940F /* Main.storyboard */,
 				F147D8611F76124A006E940F /* Assets.xcassets */,
 				F147D8631F76124A006E940F /* LaunchScreen.storyboard */,
+				F1FAFADE1F7F14770001B741 /* CANDY.TTF */,
 				F147D8661F76124A006E940F /* Info.plist */,
 			);
 			path = iceCream;
@@ -275,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1FAFADF1F7F14770001B741 /* CANDY.TTF in Resources */,
 				F147D88B1F7612DB006E940F /* Podfile in Resources */,
 				F147D8651F76124A006E940F /* LaunchScreen.storyboard in Resources */,
 				F147D8621F76124A006E940F /* Assets.xcassets in Resources */,
