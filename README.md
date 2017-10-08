@@ -22,6 +22,6 @@ App uses MkMapView to display map to the user + MkMapAnnoation to show where the
 
 ## Screen Shots
 
-<img src="img/newIceCream.png" alt="Drawing" height="200"/>
-<img src="img/IceCreamMap.png" alt="Drawing" height="200"/>
+<img src="img/newIceCream.png" alt="Drawing" height="400"/>
+<img src="img/IceCreamMap.png" alt="Drawing" height="400"/>
 
